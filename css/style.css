@@ -1,0 +1,24 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+body {
+    background-color: #f7e2c6;
+}
+
+.container {
+    /* grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr); */
+    background-color: white;
+    margin: auto;
+    display: grid;
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+}
+
+.d1, .d3, .d5, .d7, .d9, .d11, .d13, .d15 {
+    background-color: blue;
+}
