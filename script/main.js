@@ -1,37 +1,80 @@
+// to save the grid
 let container = document.querySelector('.container');
+// to enable standard mode
 let standardBtn = document.querySelector('.standard');
-function getBoxes() {
+// to enable colorful mode
+let rainbow = document.querySelector('.rainbow');
+// to reset grid
+let reset = document.querySelector('.reset');
+// generate random rgb color
 
-    for (let i = 0; i < 256; i++) {
-        let boxes = document.createElement('div');
-        boxes.addEventListener('mousemove', () => {
-            boxes.style.background = 'black';
+
+
+// default function to generate grid
+function getGrid(boxes, color) {
+    for (let i = 0; i < boxes * boxes; i++) {
+        let div = document.createElement('div');
+        container.appendChild(div);
+
+        div.addEventListener('mouseover', (e) => {
+            div.style.background = color;
         });
-        container.appendChild(boxes);
     }
-    container.setAttribute('style', 'grid-template-rows: repeat(16, 1fr); grid-template-columns: repeat(16, 1fr)');
+    container.setAttribute('style', `display: grid; grid-template-columns: repeat(${boxes}, 1fr); grid-template-rows: repeat(${boxes}, 1fr)`);
 }
-getBoxes();
+getGrid(16, 'black');
 
-standardBtn.addEventListener('click', giveStandard);
 
-function giveStandard() {
-    let gridNum = prompt('Enter the grid size which is <= 100');
-    let doubleNum = gridNum * gridNum;
+// reset grid
+function resetGrid() {
+    /*   while (container.lastChild) {
+          container.removeChild(container.lastChild);
+      } */
+    container.textContent = '';
+}
 
-    if (gridNum === null || gridNum === '' || gridNum === undefined || gridNum > 100 || gridNum === 16) {
-        getBoxes();
+// standard function whith grid adjustment
+function getStandard() {
+    let boxes = prompt('Enter grid size between 1-100', 16);
+    if (boxes > 100) {
+        alert('oh very large number. Try again!');
+        getGrid(16, 'black');
     }
-
+    else if (boxes === null || boxes === '') {
+        getGrid(16, 'black');
+    }
     else {
-        for (let i = 0; i < doubleNum; i++) {
-            let blackBoxes = document.createElement('div');
-            blackBoxes.addEventListener('mousemove', () => {
-                blackBoxes.style.background = 'black';
-            });
-            container.appendChild(blackBoxes);
-        }
-        container.setAttribute('style', `grid-template-rows: repeat(${gridNum}, 1fr); grid-template-columns: repeat(${gridNum}, 1fr)`);
+        getGrid(boxes, 'black');
     }
 }
+
+// click event on standard button
+standardBtn.addEventListener('click', () => {
+    resetGrid();
+    getStandard();
+});
+
+// click event on reset button
+reset.addEventListener('click', () => {
+    resetGrid();
+    getGrid(16, 'black');
+});
+
+let rgb01 = () => Math.floor(Math.random() * 255);
+let rgb02 = () => Math.floor(Math.random() * 255);
+let rgb03 = () => Math.floor(Math.random() * 255);
+
+rainbow.addEventListener('click', () => {
+    resetGrid();
+    getGrid(16, `rgb(${rgb01()},${rgb02()},${rgb03()})`);
+});
+
+
+
+
+
+
+
+
+
 
