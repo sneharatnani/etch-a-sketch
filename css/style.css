@@ -5,12 +5,23 @@
 }
 
 body {
-    background-color: #f7e2c6;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: white;
+    background-color: #546e7a;
+}
+
+h1, button, footer {
+    background: #47565c;
+}
+
+h1 {
+    padding: 15px;
 }
 
 .container {
-    /* grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr); */
     background-color: white;
     margin: auto;
     display: grid;
@@ -19,6 +30,24 @@ body {
     border: 2px solid black;
 }
 
-.d1, .d3, .d5, .d7, .d9, .d11, .d13, .d15 {
-    background-color: blue;
+button {
+    color: white;
+    border: none;
+    margin: 7px;
+    text-transform: capitalize;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 1px 1px 3px;
+}
+
+button:hover {
+    box-shadow: unset;
+}
+
+footer {
+    margin-top: 8px;
+    padding: 8px;
+    text-transform: capitalize;
+    font-weight: bold;
 }
