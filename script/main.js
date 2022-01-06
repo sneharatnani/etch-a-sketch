@@ -1,19 +1,13 @@
-// to save the grid
 let container = document.querySelector('.container');
-// to enable standard mode
 let standardBtn = document.querySelector('.standard');
-// to enable colorful mode
-let RainbowBtn = document.querySelector('.rainbow');
-// to erase grid
+let rainbowBtn = document.querySelector('.rainbow');
+let sketchBtn = document.querySelector('.sketch');
 let erase = document.querySelector('.erase');
 
-
-// to generate grid
 function getGrid(boxes, funcName) {
     for (let i = 0; i < boxes * boxes; i++) {
         let div = document.createElement('div');
         container.appendChild(div);
-
         div.addEventListener('mouseover', funcName);
     }
     container.setAttribute('style', `display: grid; grid-template-columns: repeat(${boxes}, 1fr); grid-template-rows: repeat(${boxes}, 1fr)`);
@@ -35,8 +29,6 @@ function adjustGrid(funcName) {
     }
 }
 
-/* functions for event listener */
-
 // default function
 function makeDefault(e) {
     e.target.style.background = 'black';
@@ -46,8 +38,15 @@ function giveRainbow(e) {
     e.target.style.background = `rgb(${getColor()}, ${getColor()}, ${getColor()})`;
 }
 
-getGrid(16, makeDefault);
-
+// sketch mode
+function makeSketch(e) {
+    let opacity = +e.target.style.opacity;
+    if (e.target.style.opacity <= 0.9) {
+        opacity += 0.1;
+    }
+    e.target.style.background = `rgb(0,0,0)`;
+    e.target.style.opacity = opacity;
+}
 
 // erase grid
 function eraseGrid() {
@@ -60,8 +59,16 @@ function getColor() {
     return color;
 }
 
-
 // events
+window.addEventListener('load', () => {
+    getGrid(16, makeDefault);
+});
+
+sketchBtn.addEventListener('click', () => {
+    eraseGrid();
+    adjustGrid(makeSketch);
+});
+
 standardBtn.addEventListener('click', () => {
     eraseGrid();
     adjustGrid(makeDefault);
@@ -72,14 +79,14 @@ erase.addEventListener('click', () => {
     getGrid(16, makeDefault);
 });
 
-RainbowBtn.addEventListener('click', () => {
+rainbowBtn.addEventListener('click', () => {
     eraseGrid();
     adjustGrid(giveRainbow);
 });
 
 // change year in the footer
-let year = document.querySelector('footer span');
-year.textContent = new Date().getFullYear();
+let currentYear = document.querySelector('footer span');
+currentYear.textContent = new Date().getFullYear();
 
 
 
