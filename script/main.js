@@ -4,8 +4,8 @@ let container = document.querySelector('.container');
 let standardBtn = document.querySelector('.standard');
 // to enable colorful mode
 let RainbowBtn = document.querySelector('.rainbow');
-// to reset grid
-let reset = document.querySelector('.reset');
+// to erase grid
+let erase = document.querySelector('.erase');
 
 
 // to generate grid
@@ -49,8 +49,8 @@ function giveRainbow(e) {
 getGrid(16, makeDefault);
 
 
-// reset grid
-function resetGrid() {
+// erase grid
+function eraseGrid() {
     container.textContent = '';
 }
 
@@ -63,23 +63,23 @@ function getColor() {
 
 // events
 standardBtn.addEventListener('click', () => {
-    resetGrid();
+    eraseGrid();
     adjustGrid(makeDefault);
 });
 
-reset.addEventListener('click', () => {
-    resetGrid();
+erase.addEventListener('click', () => {
+    eraseGrid();
     getGrid(16, makeDefault);
 });
 
 RainbowBtn.addEventListener('click', () => {
-    resetGrid();
+    eraseGrid();
     adjustGrid(giveRainbow);
 });
 
-
-
-
+// change year in the footer
+let year = document.querySelector('footer span');
+year.textContent = new Date().getFullYear();
 
 
 
